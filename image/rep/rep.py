@@ -19,12 +19,16 @@ socket.bind("tcp://*:5555")
 
 while True:
     #  Wait for next request from client
-    A = zmqa.recv(socket)
-    print("Received request")
+    A,extra = zmqa.recv(socket)
+    if 'fname' in extra:
+        print("Received request %s" % str(extra['fname']))
+    else:
+        print("Received request %s" % str(extra))
 
     #  Do some 'work'
     #time.sleep(1)
     B = cv2.Canny(A,100,200)
+    nonzero = cv2.countNonZero(B)
     #  Send reply back to client
-    zmqa.send(socket,B)
+    zmqa.send(socket,B,extra=nonzero)
 

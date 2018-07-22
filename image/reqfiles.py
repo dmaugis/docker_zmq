@@ -24,7 +24,7 @@ import os.path
 arguments = docopt(help)
 print(arguments)
 
-file_list=arguments["<files>"]
+file_list=arguments.pop("<files>", None)
 
 context = zmq.Context()
 
@@ -38,13 +38,14 @@ for fname in file_list:
         if A is None:
             print("[%s] Could not read image" % (fname))
         else:
+            arguments['fname']=fname
             print("[%s] Sending request… " % (fname) )
-            zmqa.send(socket,A)
+            zmqa.send(socket,A,extra=arguments)
             cv2.imshow('request',A)
 
             #  Get the reply.
-            B= zmqa.recv(socket)
-            print("[%s] Received reply" % (fname))
+            B,extra= zmqa.recv(socket)
+            print("[%s] Received reply %s" % (fname,str(extra)))
             cv2.imshow('reply',B)
             cv2.waitKey(100)
     else:
