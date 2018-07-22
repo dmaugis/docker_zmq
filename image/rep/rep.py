@@ -23,7 +23,7 @@ while True:
     print("Received request")
 
     #  Do some 'work'
-    time.sleep(1)
+    #time.sleep(1)
     B = cv2.Canny(A,100,200)
     #  Send reply back to client
     zmqa.send(socket,B)
