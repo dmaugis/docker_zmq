@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-help = """reqfiles
+help = """reqimages
  
 Usage:
   reqfiles.py <files>...
