@@ -24,8 +24,9 @@ def recv(socket, flags=0, copy=True, track=False):
     A=None
     if 'dtype' in md:
        if 'shape' in md:
-          A = np.frombuffer(msg, dtype=md['dtype'])
-          A = A.reshape(md['shape'])
+          if md['dtype']!='object':
+             A = np.frombuffer(msg, dtype=md['dtype'])
+             A = A.reshape(md['shape'])
     return A, extra
 
 

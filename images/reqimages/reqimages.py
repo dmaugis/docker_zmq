@@ -48,7 +48,7 @@ for fname in file_list:
             cv2.imshow('request',A)
             if B is not None:
                cv2.imshow('reply',B)
-            cv2.waitKey(1)
+            cv2.waitKey(10)
     else:
         print("[%s] could not access file" % (fname))
 
