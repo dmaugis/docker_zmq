@@ -22,7 +22,7 @@ import os
 import os.path
 
 arguments = docopt(help)
-print(arguments)
+#print(arguments)
 
 file_list=arguments.pop("<files>", None)
 
@@ -40,15 +40,15 @@ for fname in file_list:
         else:
             arguments['fname']=fname
             print("[%s] Sending request… " % (fname) )
-            #zmqa.send(socket,A,extra=arguments)
-            zmqa.send(socket,A)
+            zmqa.send(socket,A,extra=arguments)
+            #zmqa.send(socket,A)
             #  Get the reply.
             B,extra= zmqa.recv(socket)
             print("[%s] Received reply %s" % (fname,str(extra)))
             cv2.imshow('request',A)
             if B is not None:
                cv2.imshow('reply',B)
-            cv2.waitKey(1)
+            cv2.waitKey(10)
     else:
         print("[%s] could not access file" % (fname))
 

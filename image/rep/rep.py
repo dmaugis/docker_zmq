@@ -21,9 +21,9 @@ while True:
     #  Wait for next request from client
     A,extra = zmqa.recv(socket)
     if 'fname' in extra:
-        print("Received request %s" % str(extra['fname']))
+        print("Received request %s" % extra['fname'])
     else:
-        print("Received request %s" % str(extra))
+        print("Received request %s" % extra)
 
     #  Do some 'work'
     #time.sleep(1)
